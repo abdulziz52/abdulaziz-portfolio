@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdulaziz Zakzriyya Muhammed - Personal Portfolio & Admin Platform</title>
+    <meta name="description" content="Portfolio website of Abdulaziz Zakzriyya Muhammed - Web Developer, Computer Science Student, and Aspiring Software Engineer from Nigeria.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0B132B',
+                            900: '#070A13',
+                            950: '#03050A',
+                        },
+                        electric: {
+                            400: '#38BDF8',
+                            500: '#0EA5E9',
+                            600: '#0284C7',
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'float-fast': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+                        'gradient-x': 'gradientX 8s ease infinite',
+                        'spin-slow': 'spin 12s linear infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.4', filter: 'blur(20px)' },
+                            '50%': { opacity: '0.8', filter: 'blur(30px)' },
+                        },
+                        gradientX: {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 dark:bg-navy-950 text-slate-800 dark:text-slate-100 font-['Poppins'] antialiased selection:bg-electric-500 selection:text-white relative overflow-x-hidden transition-colors duration-300">
+
+    <!-- Canvas Background for Animated Particles -->
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40 dark:opacity-30"></canvas>
+
+    <!-- Background Animated Gradient Orbs -->
+    <div class="fixed top-20 left-10 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow z-0"></div>
+    <div class="fixed bottom-20 right-10 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-glow z-0" style="animation-delay: 1.5s;"></div>
+
+    <!-- MAIN NAVIGATION -->
+    <nav class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-navy-900/80 border-b border-slate-200 dark:border-slate-800/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#home" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-electric-600 to-blue-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-electric-500/25 group-hover:scale-105 transition-transform duration-300">
+                    AZ
+                </div>
+                <div>
+                    <span class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-electric-400">
+                        Abdulaziz Z.
+                    </span>
+                    <span class="block text-xs text-electric-600 dark:text-electric-400 font-medium">Software Developer</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Items -->
+            <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <a href="#home" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-electric-500 dark:hover:text-electric-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">Home</a>
+                <a href="#about" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-electric-500 dark:hover:text-electric-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">About</a>
+                <a href="#skills" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-electric-500 dark:hover:text-electric-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">Skills</a>
+                <a href="#projects" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-electric-500 dark:hover:text-electric-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">Projects</a>
+                <a href="#services" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-electric-500 dark:hover:text-electric-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">Services</a>
+                <a href="#contact" class="nav-link px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-electric-500 dark:hover:text-electric-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all">Contact</a>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center space-x-3">
+                <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-electric-500 transition-colors">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+                
+                <button id="adminLoginTrigger" onclick="openAdminModal()" class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:border-electric-500 dark:hover:border-electric-400 rounded-xl transition-all flex items-center space-x-2 hover:shadow-md">
+                    <i data-lucide="shield" class="w-4 h-4 text-electric-500"></i>
+                    <span id="navAdminBtnText">Admin Portal</span>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center space-x-2 md:hidden">
+                <button onclick="toggleDarkMode()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+                <button onclick="toggleMobileMenu()" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 focus:outline-none">
+                    <i data-lucide="menu" id="menuOpenIcon" class="w-6 h-6"></i>
+                    <i data-lucide="x" id="menuCloseIcon" class="w-6 h-6 hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-navy-900/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-2">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-electric-500/10 hover:text-electric-500">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-electric-500/10 hover:text-electric-500">About</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-electric-500/10 hover:text-electric-500">Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-electric-500/10 hover:text-electric-500">Projects</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-electric-500/10 hover:text-electric-500">Services</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-electric-500/10 hover:text-electric-500">Contact</a>
+            <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <button onclick="openAdminModal(); toggleMobileMenu();" class="w-full py-2.5 px-4 bg-slate-100 dark:bg-slate-800 text-electric-600 dark:text-electric-400 font-medium rounded-xl flex items-center justify-center space-x-2">
+                    <i data-lucide="lock" class="w-4 h-4"></i>
+                    <span>Admin Access</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative pt-12 pb-20 md:pt-24 md:pb-32 overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                <!-- Text Intro -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-electric-500/10 border border-electric-500/20 text-electric-600 dark:text-electric-400 text-xs sm:text-sm font-semibold tracking-wide animate-float-slow">
+                        <span class="w-2 h-2 rounded-full bg-electric-500 animate-ping"></span>
+                        <span>Available for Web & Application Development</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900 dark:text-white">
+                        Hello, I'm <br class="hidden sm:inline"/>
+                        <span class="bg-gradient-to-r from-electric-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+                            Abdulaziz Zakzriyya Muhammed
+                        </span>
+                    </h1>
+
+                    <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
+                        I'm a Computer Science student and aspiring software developer passionate about technology, creative problem-solving, and building digital solutions for individuals, businesses, and institutions.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                        <a href="#projects" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-electric-500 to-blue-600 hover:from-electric-600 hover:to-blue-700 text-white font-semibold text-sm shadow-lg shadow-electric-500/25 hover:shadow-electric-500/40 hover:-translate-y-0.5 transition-all flex items-center space-x-2">
+                            <span>View My Projects</span>
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+
+                        <a href="#contact" class="px-6 py-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 hover:border-electric-500 dark:hover:border-electric-400 text-slate-800 dark:text-slate-100 font-semibold text-sm hover:-translate-y-0.5 transition-all flex items-center space-x-2 shadow-sm">
+                            <i data-lucide="briefcase" class="w-4 h-4 text-electric-500"></i>
+                            <span>Hire Me</span>
+                        </a>
+
+                        <a href="https://wa.me/234703664967" target="_blank" class="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md shadow-emerald-600/20 hover:-translate-y-0.5 transition-all flex items-center space-x-2">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                            <span>WhatsApp</span>
+                        </a>
+
+                        <a id="downloadCvHeroBtn" href="#" onclick="handleDownloadCv(event)" class="px-6 py-3.5 rounded-xl bg-slate-200 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm transition-all flex items-center space-x-2">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            <span id="cvBtnText">Download CV</span>
+                        </a>
+                    </div>
+
+                    <!-- Tech Pill Quick List -->
+                    <div class="pt-6 border-t border-slate-200/60 dark:border-slate-800/60 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-medium text-slate-500 dark:text-slate-400">
+                        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-electric-500"></i> Modern UI/UX</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-electric-500"></i> Full Stack Web</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check-circle" class="w-4 h-4 text-electric-500"></i> Mobile Responsive</span>
+                    </div>
+                </div>
+
+                <!-- Hero Photo Box -->
+                <div class="lg:col-span-5 flex justify-center relative">
+                    <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96">
+                        <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-electric-500 to-indigo-600 rotate-6 blur-lg opacity-40 animate-pulse-glow"></div>
+                        <div class="relative w-full h-full rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-slate-800 group">
+                            <img id="heroProfileImg" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" alt="Abdulaziz Zakzriyya Muhammed" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            
+                            <div class="absolute bottom-4 left-4 right-4 p-3 rounded-2xl backdrop-blur-md bg-white/10 dark:bg-slate-900/40 border border-white/10 text-white">
+                                <p class="text-xs font-medium text-slate-300">Based in</p>
+                                <p class="text-sm font-semibold flex items-center space-x-1.5">
+                                    <i data-lucide="map-pin" class="w-4 h-4 text-electric-400"></i>
+                                    <span>Bauchi State, Nigeria</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 1 -->
+                        <div class="absolute -top-4 -left-4 p-3.5 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 flex items-center space-x-3 animate-float-slow">
+                            <div class="w-9 h-9 rounded-xl bg-electric-500/10 text-electric-500 flex items-center justify-center">
+                                <i data-lucide="code" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Institution</p>
+                                <p class="text-xs font-bold text-slate-800 dark:text-slate-100">ATAP Poly Bauchi</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge 2 -->
+                        <div class="absolute -bottom-4 -right-4 p-3.5 bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-700 flex items-center space-x-3 animate-float-fast">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                                <i data-lucide="check-check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-medium">Status</p>
+                                <p class="text-xs font-bold text-slate-800 dark:text-slate-100">CS Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BANNER -->
+    <section class="py-8 bg-white/50 dark:bg-slate-900/50 border-y border-slate-200/60 dark:border-slate-800/60 backdrop-blur-md relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-electric-500" id="statProjects">4+</span>
+                    <span class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Deployed Projects</span>
+                </div>
+                <div class="p-4">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-blue-500" id="statSkills">10+</span>
+                    <span class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Core Tech Skills</span>
+                </div>
+                <div class="p-4">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-emerald-500">100%</span>
+                    <span class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Responsive Layouts</span>
+                </div>
+                <div class="p-4">
+                    <span class="block text-3xl sm:text-4xl font-extrabold text-indigo-500">2</span>
+                    <span class="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">Active Lines</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-electric-500 tracking-wider uppercase">Background & Aspirations</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">About Me</h2>
+                <div class="w-16 h-1 bg-electric-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- Bio Text -->
+                <div class="lg:col-span-7 bg-white dark:bg-navy-900/70 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl flex flex-col justify-between">
+                    <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base" id="aboutBioDisplay">
+                        <p>
+                            I am a passionate <strong class="text-slate-900 dark:text-white">Computer Science Student</strong> currently studying at <strong class="text-slate-900 dark:text-white">Abubakar Tatari Ali Polytechnic, Bauchi State, Nigeria</strong>.
+                        </p>
+                        <p>
+                            My goal is to build intelligent, high-performing web tools and user-centric applications. Over time, I have engineered diverse solutions ranging from furniture e-commerce storefronts to multi-tenant student complaint ticketing portals and hospital directory mapping setups.
+                        </p>
+                        <p>
+                            I am continually sharpening my technical stack in frontend architectures, database management, backend APIs, and responsive design systems.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800/80 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                        <div class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40">
+                            <i data-lucide="graduation-cap" class="w-5 h-5 text-electric-500 flex-shrink-0"></i>
+                            <div>
+                                <p class="text-xs text-slate-400">Department</p>
+                                <p class="font-semibold text-slate-800 dark:text-slate-200">Computer Science</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/40">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-electric-500 flex-shrink-0"></i>
+                            <div>
+                                <p class="text-xs text-slate-400">Location</p>
+                                <p class="font-semibold text-slate-800 dark:text-slate-200">Nigeria</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Career Cards -->
+                <div class="lg:col-span-5 space-y-6 flex flex-col justify-between">
+                    <div class="bg-gradient-to-br from-electric-600 to-indigo-700 text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
+                        <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+                        <i data-lucide="award" class="w-10 h-10 text-electric-200 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Academic Journey</h3>
+                        <p class="text-sm text-electric-100 leading-relaxed" id="aboutEducationDisplay">
+                            Abubakar Tatari Ali Polytechnic, Bauchi State.<br/>
+                            Specializing in software design, algorithms, database systems, and web design fundamentals.
+                        </p>
+                    </div>
+
+                    <div class="bg-white dark:bg-navy-900/70 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl">
+                        <i data-lucide="target" class="w-8 h-8 text-electric-500 mb-4"></i>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Career Objectives</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed" id="aboutGoalsDisplay">
+                            Aspiring to become a Full-Stack Software Engineer building scalable software solutions for businesses, enterprise organizations, and local African communities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="py-20 bg-slate-100/60 dark:bg-navy-900/40 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-electric-500 tracking-wider uppercase">Technical Proficiency</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Skills & Competencies</h2>
+                <div class="w-16 h-1 bg-electric-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Dynamic Skills Container -->
+            <div id="skillsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Rendered dynamically by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-xs font-bold text-electric-500 tracking-wider uppercase">Portfolio Work</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
+                <div class="w-16 h-1 bg-electric-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-12" id="projectCategoryFilters">
+                <button onclick="filterProjects('All')" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-electric-500 text-white shadow-md shadow-electric-500/20">All Projects</button>
+                <button onclick="filterProjects('Business Website')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Business Websites</button>
+                <button onclick="filterProjects('Web Application')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Web Applications</button>
+                <button onclick="filterProjects('Academic Project')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Academic Projects</button>
+                <button onclick="filterProjects('Startup Concept')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200">Startup Concepts</button>
+            </div>
+
+            <!-- Projects Grid Container -->
+            <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-20 bg-slate-100/60 dark:bg-navy-900/40 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-electric-500 tracking-wider uppercase">What I Deliver</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Services Offered</h2>
+                <div class="w-16 h-1 bg-electric-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold text-electric-500 tracking-wider uppercase">Get In Touch</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Let's Connect</h2>
+                <div class="w-16 h-1 bg-electric-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Direct Info Panel -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-white dark:bg-navy-900/70 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Direct Communication</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300">
+                            Have a web development query, business proposal, or project idea? Feel free to write me directly or reach out via WhatsApp.
+                        </p>
+
+                        <div class="space-y-4">
+                            <!-- Email -->
+                            <a id="contactEmailLink" href="mailto:abdulazizmuhammed40@gmail.com" class="flex items-center space-x-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 hover:bg-electric-500/10 transition-colors group">
+                                <div class="w-12 h-12 rounded-xl bg-electric-500/10 text-electric-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i data-lucide="mail" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">Email Address</p>
+                                    <p class="text-sm font-semibold text-slate-800 dark:text-slate-100" id="contactEmailDisplay">abdulazizmuhammed40@gmail.com</p>
+                                </div>
+                            </a>
+
+                            <!-- WhatsApp 1 -->
+                            <a id="contactWaLink1" href="https://wa.me/234703664967" target="_blank" class="flex items-center space-x-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 hover:bg-emerald-500/10 transition-colors group">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i data-lucide="phone-call" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">WhatsApp Line 1</p>
+                                    <p class="text-sm font-semibold text-slate-800 dark:text-slate-100" id="contactWaDisplay1">0703664967</p>
+                                </div>
+                            </a>
+
+                            <!-- WhatsApp 2 -->
+                            <a id="contactWaLink2" href="https://wa.me/2348102613935" target="_blank" class="flex items-center space-x-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 hover:bg-emerald-500/10 transition-colors group">
+                                <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <i data-lucide="phone" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-medium">WhatsApp Line 2</p>
+                                    <p class="text-sm font-semibold text-slate-800 dark:text-slate-100" id="contactWaDisplay2">08102613935</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Panel -->
+                <div class="lg:col-span-7">
+                    <form id="publicContactForm" onsubmit="handlePublicContactSubmit(event)" class="bg-white dark:bg-navy-900/70 p-6 sm:p-8 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-5">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Send a Direct Message</h3>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Your Name</label>
+                                <input type="text" id="contactName" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-electric-500 text-slate-800 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Your Email</label>
+                                <input type="email" id="contactEmail" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-electric-500 text-slate-800 dark:text-white">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Subject</label>
+                            <input type="text" id="contactSubject" required placeholder="Project Inquiry / Opportunity" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-electric-500 text-slate-800 dark:text-white">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Message</label>
+                            <textarea id="contactMessage" rows="4" required placeholder="Hello Abdulaziz, I would like to discuss..." class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-electric-500 text-slate-800 dark:text-white resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-electric-500 to-blue-600 hover:from-electric-600 hover:to-blue-700 text-white font-semibold text-sm shadow-lg shadow-electric-500/25 transition-all flex items-center justify-center space-x-2">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-navy-950 border-t border-slate-200 dark:border-slate-800 py-12 relative z-10 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-electric-500 text-white font-bold flex items-center justify-center text-sm">AZ</div>
+                <span class="text-slate-600 dark:text-slate-400 font-medium">
+                    © <span id="currentYear">2026</span> <span id="footerNameDisplay">Abdulaziz Zakzriyya Muhammed</span>. All rights reserved.
+                </span>
+            </div>
+
+            <!-- Social Links & Admin Footer Link -->
+            <div class="flex items-center space-x-4 text-slate-500 dark:text-slate-400">
+                <a id="githubSocial" href="https://github.com" target="_blank" class="hover:text-electric-500 transition-colors p-2"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <a id="linkedinSocial" href="https://linkedin.com" target="_blank" class="hover:text-electric-500 transition-colors p-2"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <button onclick="openAdminModal()" class="text-xs text-slate-400 hover:text-electric-500 flex items-center space-x-1 pl-4 border-l border-slate-200 dark:border-slate-800">
+                    <i data-lucide="key" class="w-3.5 h-3.5"></i>
+                    <span>Admin Area</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PROJECT DETAILS MODAL -->
+    <div id="projectDetailModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-opacity">
+        <div class="bg-white dark:bg-navy-900 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800 hover:text-electric-500">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div id="modalProjectContent" class="space-y-6">
+                <!-- Filled dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN LOGIN MODAL -->
+    <div id="adminLoginModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-navy-900 rounded-3xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-6 sm:p-8 relative">
+            <button onclick="closeAdminModal()" class="absolute top-6 right-6 p-2 rounded-full bg-slate-100 dark:bg-slate-800">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="text-center space-y-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-electric-500/10 text-electric-500 flex items-center justify-center mx-auto">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">Admin Authentication</h3>
+                <p class="text-xs text-slate-500">Access private management dashboard</p>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1">Passkey</label>
+                    <input type="password" id="adminPasswordInput" required placeholder="Enter admin password (default: admin123)" class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm focus:outline-none focus:border-electric-500">
+                </div>
+
+                <p id="adminLoginError" class="text-xs text-red-500 hidden text-center">Invalid admin credentials.</p>
+
+                <button type="submit" class="w-full py-3 rounded-xl bg-electric-500 hover:bg-electric-600 text-white font-semibold text-sm shadow-md shadow-electric-500/20">
+                    Unlock Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FULL PRIVATE ADMIN DASHBOARD OVERLAY -->
+    <div id="adminDashboardOverlay" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-50 hidden overflow-y-auto">
+        <div class="min-h-screen p-4 sm:p-8 max-w-7xl mx-auto space-y-8 text-slate-800 dark:text-slate-100">
+            <!-- Top Admin Header -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <span class="px-2.5 py-1 rounded-md bg-electric-500/20 text-electric-400 text-xs font-bold uppercase">Private Panel</span>
+                        <h1 class="text-2xl font-bold text-white">Management Dashboard</h1>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-1">Manage profile, projects, skills, services, and incoming contact submissions.</p>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="saveAdminStateToLocalStorage()" class="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-semibold flex items-center space-x-2">
+                        <i data-lucide="save" class="w-4 h-4"></i>
+                        <span>Save All Changes</span>
+                    </button>
+                    <button onclick="closeAdminDashboard()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 hover:bg-slate-700 text-xs font-semibold">
+                        Exit Dashboard
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Overview -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+                    <p class="text-xs text-slate-400">Total Projects</p>
+                    <p class="text-2xl font-bold text-white mt-1" id="dashTotalProj">0</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+                    <p class="text-xs text-slate-400">Published Projects</p>
+                    <p class="text-2xl font-bold text-emerald-400 mt-1" id="dashPubProj">0</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+                    <p class="text-xs text-slate-400">Draft Projects</p>
+                    <p class="text-2xl font-bold text-amber-400 mt-1" id="dashDraftProj">0</p>
+                </div>
+                <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800">
+                    <p class="text-xs text-slate-400">Messages Received</p>
+                    <p class="text-2xl font-bold text-electric-400 mt-1" id="dashMessagesCount">0</p>
+                </div>
+            </div>
+
+            <!-- Admin Tabs Navigation -->
+            <div class="flex border-b border-slate-800 space-x-4 overflow-x-auto">
+                <button onclick="switchAdminTab('profile')" class="admin-tab-btn active pb-3 text-sm font-semibold border-b-2 border-electric-500 text-electric-400">Profile Settings</button>
+                <button onclick="switchAdminTab('projects')" class="admin-tab-btn pb-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-white">Projects Manager</button>
+                <button onclick="switchAdminTab('skills')" class="admin-tab-btn pb-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-white">Skills</button>
+                <button onclick="switchAdminTab('inbox')" class="admin-tab-btn pb-3 text-sm font-semibold border-b-2 border-transparent text-slate-400 hover:text-white">Contact Inbox</button>
+            </div>
+
+            <!-- TAB 1: PROFILE MANAGEMENT -->
+            <div id="adminTabProfile" class="admin-tab-content space-y-6">
+                <form onsubmit="handleProfileUpdate(event)" class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-900 p-6 rounded-3xl border border-slate-800">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Full Name</label>
+                        <input type="text" id="editName" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Professional Title</label>
+                        <input type="text" id="editTitle" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Email Address</label>
+                        <input type="email" id="editEmail" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">WhatsApp 1</label>
+                        <input type="text" id="editWa1" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">WhatsApp 2</label>
+                        <input type="text" id="editWa2" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Profile Image Source URL or File</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="editPhotoUrl" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                            <input type="file" id="editPhotoFile" accept="image/*" onchange="handlePhotoUpload(event)" class="hidden">
+                            <button type="button" onclick="document.getElementById('editPhotoFile').click()" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl text-xs text-slate-300">
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Biography</label>
+                        <textarea id="editBio" rows="3" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white"></textarea>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-slate-400 mb-1">CV File / External URL</label>
+                        <input type="text" id="editCvUrl" placeholder="Enter PDF link or upload location" class="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div class="md:col-span-2 flex justify-end">
+                        <button type="submit" class="px-6 py-2.5 bg-electric-500 text-white rounded-xl font-semibold text-sm">Update Profile Info</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- TAB 2: PROJECTS MANAGEMENT -->
+            <div id="adminTabProjects" class="admin-tab-content space-y-6 hidden">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-white">All Projects</h3>
+                    <button onclick="openProjectEditModal()" class="px-4 py-2 rounded-xl bg-electric-500 text-white text-xs font-semibold flex items-center space-x-2">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        <span>Add New Project</span>
+                    </button>
+                </div>
+
+                <div class="bg-slate-900 rounded-3xl border border-slate-800 overflow-x-auto">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="bg-slate-950 text-slate-400 font-semibold border-b border-slate-800">
+                            <tr>
+                                <th class="p-4">Title</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminProjectsTableBody" class="divide-y divide-slate-800">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TAB 3: SKILLS MANAGEMENT -->
+            <div id="adminTabSkills" class="admin-tab-content space-y-6 hidden">
+                <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4">
+                    <h3 class="text-lg font-bold text-white">Add New Skill</h3>
+                    <form onsubmit="handleAddNewSkill(event)" class="flex flex-col sm:flex-row gap-3">
+                        <input type="text" id="newSkillName" required placeholder="Skill Name (e.g. Python)" class="flex-1 px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                        <input type="text" id="newSkillCategory" placeholder="Category (e.g. Backend)" class="px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                        <button type="submit" class="px-5 py-2 bg-electric-500 text-white rounded-xl text-xs font-bold">Add Skill</button>
+                    </form>
+                </div>
+
+                <div id="adminSkillsList" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- TAB 4: CONTACT INBOX -->
+            <div id="adminTabInbox" class="admin-tab-content space-y-6 hidden">
+                <div id="adminInboxList" class="space-y-4">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECT EDIT / CREATE MODAL -->
+    <div id="adminProjectFormModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-800 p-6 space-y-4 text-white">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+                <h3 class="text-lg font-bold" id="projectModalTitle">Add Project</h3>
+                <button onclick="closeProjectEditModal()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+            </div>
+
+            <form onsubmit="handleSaveProject(event)" class="space-y-4 text-xs">
+                <input type="hidden" id="projEditId">
+                
+                <div>
+                    <label class="block text-slate-400 mb-1">Project Title</label>
+                    <input type="text" id="projEditTitle" required class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Category</label>
+                        <select id="projEditCategory" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                            <option value="Business Website">Business Website</option>
+                            <option value="Web Application">Web Application</option>
+                            <option value="Academic Project">Academic Project</option>
+                            <option value="Startup Concept">Startup Concept</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-400 mb-1">Status</label>
+                        <select id="projEditStatus" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-400 mb-1">Short Description</label>
+                    <textarea id="projEditShortDesc" rows="2" required class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-slate-400 mb-1">Full Description</label>
+                    <textarea id="projEditFullDesc" rows="4" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-slate-400 mb-1">Technologies Used (comma separated)</label>
+                    <input type="text" id="projEditTech" placeholder="HTML, CSS, JavaScript" class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-400 mb-1">Live URL</label>
+                        <input type="text" id="projEditLiveUrl" placeholder="https://..." class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">Cover Image URL</label>
+                        <input type="text" id="projEditCoverUrl" placeholder="https://..." class="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-sm text-white">
+                    </div>
+                </div>
+
+                <div class="pt-3 flex justify-end space-x-3">
+                    <button type="button" onclick="closeProjectEditModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300">Cancel</button>
+                    <button type="submit" class="px-5 py-2 rounded-xl bg-electric-500 text-white font-bold">Save Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-50 bg-slate-900 border border-slate-700 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i data-lucide="info" class="w-5 h-5 text-electric-400" id="toastIcon"></i>
+        <span class="text-sm font-medium" id="toastText">Message saved successfully</span>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
